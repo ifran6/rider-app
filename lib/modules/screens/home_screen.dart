@@ -32,8 +32,8 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 16),
             child: Stack(
               children: [
-                Icon(Icons.notifications),
-                FaIcon(FontAwesomeIcons.arrowsLeftRight),
+                // Icon(Icons.notifications),
+                FaIcon(FontAwesomeIcons.bell),
                 Positioned(
                   bottom: 10,
                   left: 12,
