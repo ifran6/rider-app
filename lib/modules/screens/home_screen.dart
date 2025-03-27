@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  bool isDarkMode = false;
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(child: ListTile(title: Icon(Icons.menu))),
+      drawer: CustomDrawer(
+        isDarkMode: isDarkMode,
+        onThemeChanged: (value) {
+          setState(() {
+            isDarkMode = value;
+          });
+        },
+      ),
       appBar: AppBar(
         backgroundColor: Colors.white,
         toolbarHeight: 120,
@@ -212,6 +225,147 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomDrawer extends StatelessWidget {
+  final bool isDarkMode;
+  final ValueChanged<bool> onThemeChanged;
+
+  CustomDrawer({required this.isDarkMode, required this.onThemeChanged});
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Column(
+        children: [
+          UserAccountsDrawerHeader(
+            decoration: BoxDecoration(color: Colors.white),
+            accountName: Text(
+              "Demo Rider",
+              style: TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            accountEmail: Text(
+              "01700000000",
+              style: TextStyle(color: Colors.grey),
+            ),
+            currentAccountPicture: CircleAvatar(
+              backgroundImage: AssetImage(
+                "assets/avatar.png",
+              ), // Change to actual image
+            ),
+          ),
+          // Completed Job & Cash Collected Section
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: Row(
+              children: [
+                _infoCard("Completed Job", "0", Icons.check_circle),
+                SizedBox(width: 10),
+                _infoCard("Cash Collected", "€0.00", Icons.attach_money),
+              ],
+            ),
+          ),
+          SizedBox(height: 20),
+          _menuItem(Icons.history, "Order History"),
+          _menuItem(Icons.language, "Language", trailing: _languageWidget()),
+          _menuItem(Icons.support_agent, "Rider Support"),
+          _menuItem(Icons.policy, "Terms and Conditions"),
+          _menuItem(Icons.lock, "Privacy Policy"),
+          _menuItem(Icons.password, "Change Password"),
+          _themeToggle(),
+          _logoutButton(),
+        ],
+      ),
+    );
+  }
+
+  Widget _infoCard(String title, String value, IconData icon) {
+    return Expanded(
+      child: Card(
+        color: Colors.black87,
+        child: Padding(
+          padding: EdgeInsets.all(12),
+          child: Column(
+            children: [
+              Text(
+                title,
+                style: TextStyle(color: Colors.white70, fontSize: 12),
+              ),
+              SizedBox(height: 5),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(icon, color: Colors.green, size: 16),
+                  SizedBox(width: 5),
+                  Text(
+                    value,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _menuItem(IconData icon, String title, {Widget? trailing}) {
+    return ListTile(
+      leading: Icon(icon, color: Colors.pinkAccent),
+      title: Text(title),
+      trailing: trailing,
+      onTap: () {},
+    );
+  }
+
+  Widget _languageWidget() {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade300,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(Icons.flag, color: Colors.red),
+          SizedBox(width: 5),
+          Text("ENG", style: TextStyle(fontWeight: FontWeight.bold)),
+        ],
+      ),
+    );
+  }
+
+  Widget _themeToggle() {
+    return ListTile(
+      leading: Icon(Icons.brightness_6, color: Colors.pinkAccent),
+      title: Text("Theme"),
+      trailing: Switch(value: isDarkMode, onChanged: onThemeChanged),
+    );
+  }
+
+  Widget _logoutButton() {
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ElevatedButton.icon(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: Colors.redAccent,
+          foregroundColor: Colors.white,
+          minimumSize: Size(double.infinity, 40),
+        ),
+        onPressed: () {},
+        icon: Icon(Icons.logout),
+        label: Text("Logout"),
       ),
     );
   }
