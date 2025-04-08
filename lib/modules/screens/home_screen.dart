@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:rider_app/modules/screens/change_password.dart';
+import 'package:rider_app/modules/screens/order_history_screen.dart';
+import 'package:rider_app/modules/screens/privacy_policy.dart';
+import 'package:rider_app/modules/screens/rider_support.dart';
+import 'package:rider_app/modules/screens/term_and_conditions.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -97,7 +102,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                          
+                          },
                           icon: Icon(Icons.arrow_forward),
                         ),
                       ],
@@ -234,7 +241,7 @@ class CustomDrawer extends StatelessWidget {
   final bool isDarkMode;
   final ValueChanged<bool> onThemeChanged;
 
-  CustomDrawer({required this.isDarkMode, required this.onThemeChanged});
+  const CustomDrawer({super.key, required this.isDarkMode, required this.onThemeChanged});
 
   @override
   Widget build(BuildContext context) {
@@ -264,20 +271,20 @@ class CustomDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(
-              children: [
+              children: <Widget>[
                 _infoCard("Completed Job", "0", Icons.check_circle),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 _infoCard("Cash Collected", "€0.00", Icons.attach_money),
               ],
             ),
           ),
           SizedBox(height: 20),
-          _menuItem(Icons.history, "Order History"),
+          _menuItem(Icons.history, "Order History", onTap: () => (Navigator.push(context, MaterialPageRoute(builder:(context) => OrderHistoryScreen(),))),),
           _menuItem(Icons.language, "Language", trailing: _languageWidget()),
-          _menuItem(Icons.support_agent, "Rider Support"),
-          _menuItem(Icons.policy, "Terms and Conditions"),
-          _menuItem(Icons.lock, "Privacy Policy"),
-          _menuItem(Icons.password, "Change Password"),
+          _menuItem(Icons.support_agent, "Rider Support", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => RiderSupportScreen(),))),),
+          _menuItem(Icons.policy, "Terms and Conditions", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) =>TermsandConditionsScreen(),))),),
+          _menuItem(Icons.lock, "Privacy Policy", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => PrivacyPolicyScreen(),))),),
+          _menuItem(Icons.password, "Change Password", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) =>ChangePasswordScreen(),))),),
           _themeToggle(),
           _logoutButton(),
         ],
@@ -319,12 +326,12 @@ class CustomDrawer extends StatelessWidget {
     );
   }
 
-  Widget _menuItem(IconData icon, String title, {Widget? trailing}) {
+  Widget _menuItem(IconData icon, String title, {Widget? trailing, void Function()? onTap}) {
     return ListTile(
       leading: Icon(icon, color: Colors.pinkAccent),
       title: Text(title),
       trailing: trailing,
-      onTap: () {},
+      onTap: onTap,
     );
   }
 
