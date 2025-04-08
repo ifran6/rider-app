@@ -15,6 +15,7 @@ class _PrivacyPolicyStateScreen extends State<PrivacyPolicyScreen>{
       appBar: AppBar(
         title: Text("Privacy Policy"),
         elevation: 8,
+        toolbarHeight: 120,
       ),
     );
   }

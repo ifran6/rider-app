@@ -14,6 +14,7 @@ class _ChangePasswordStateScreen extends State<ChangePasswordScreen>{
     return Scaffold(
       appBar: AppBar(
         title: Text("Change Password"),
+        toolbarHeight: 120,
         elevation: 8,
       ),
     );

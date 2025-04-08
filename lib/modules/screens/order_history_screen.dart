@@ -47,7 +47,7 @@ class _OrderHistoryScreenState extends State<OrderHistoryScreen>{
       ),
     
       body:Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [  

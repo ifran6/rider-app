@@ -14,6 +14,7 @@ class _RiderSupportScreenState extends State<RiderSupportScreen>{
     return Scaffold(
       appBar: AppBar(
         title: Text("Rider Support Screen"),
+        toolbarHeight: 120,
         elevation: 8,
       ),
     );

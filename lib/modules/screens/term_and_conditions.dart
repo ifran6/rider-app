@@ -14,6 +14,7 @@ class _TermsandConditionsStateScreen extends State<TermsandConditionsScreen>{
     return Scaffold(
       appBar: AppBar(
         title: Text("Terms and Conditions"),
+        toolbarHeight: 120,
         elevation: 8,
       ),
     );
