@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rider_app/modules/screens/change_password.dart';
 import 'package:rider_app/modules/screens/order_history_screen.dart';
 import 'package:rider_app/modules/screens/privacy_policy.dart';
-import 'package:rider_app/modules/screens/rider_support.dart';
+import 'package:rider_app/modules/screens/profile_screen.dart';
+import 'package:rider_app/modules/screens/support_screen.dart';
+import 'package:rider_app/modules/screens/support_screen.dart';
 import 'package:rider_app/modules/screens/term_and_conditions.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -250,22 +252,29 @@ class CustomDrawer extends StatelessWidget {
         children: [
           UserAccountsDrawerHeader(
             decoration: BoxDecoration(color: Colors.white),
-            accountName: Text(
+             currentAccountPicture: GestureDetector(
+               onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(),))),
+               child: CircleAvatar(
+                backgroundImage: AssetImage(
+                  "assets/avatar.png",
+                ), // Change to actual image
+                           ),
+             ),
+            accountName: GestureDetector(
+              onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(),))),
+              child: Text(
               "Demo Rider",
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.bold,
               ),
             ),
+            ),
             accountEmail: Text(
               "01700000000",
               style: TextStyle(color: Colors.grey),
             ),
-            currentAccountPicture: CircleAvatar(
-              backgroundImage: AssetImage(
-                "assets/avatar.png",
-              ), // Change to actual image
-            ),
+           
           ),
           // Completed Job & Cash Collected Section
           Padding(
@@ -281,9 +290,9 @@ class CustomDrawer extends StatelessWidget {
           SizedBox(height: 20),
           _menuItem(Icons.history, "Order History", onTap: () => (Navigator.push(context, MaterialPageRoute(builder:(context) => OrderHistoryScreen(),))),),
           _menuItem(Icons.language, "Language", trailing: _languageWidget()),
-          _menuItem(Icons.support_agent, "Rider Support", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => RiderSupportScreen(),))),),
+          _menuItem(Icons.support_agent, "Rider Support", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => SupportScreen(),))),),
           _menuItem(Icons.policy, "Terms and Conditions", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) =>TermsandConditionsScreen(),))),),
-          _menuItem(Icons.lock, "Privacy Policy", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) => PrivacyPolicyScreen(),))),),
+          _menuItem(Icons.lock, "Privacy Policy", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) =>PrivacySecurityScreen(),))),),
           _menuItem(Icons.password, "Change Password", onTap: () => (Navigator.push(context, MaterialPageRoute(builder: (context) =>ChangePasswordScreen(),))),),
           _themeToggle(),
           _logoutButton(),
